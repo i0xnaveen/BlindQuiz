@@ -6,8 +6,174 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+[data-theme="light"]{
+  --bg-color:#ffffff;
+  --heading-color:#444444;
+  --text-color:#333333;
+}
+[data-theme="dark"]{
+  --bg-color:#333333;
+  --heading-color:#ffffff;
+  --text-color:#dddddd;
+}
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+:root{
+  --primary-color: #0DFF92;
+  --dark-color:#222222;
+  --light-color: #f0f0f0;
+}
+
+body, html{
+  color:var(--text-color);
+  background-color: var(--bg-color);
+  height: 100%;
+}
+div{
+  color: var(--text-color);
+}
+
+* > *{
+    font-family: 'Poppins', sans-serif;
+}
+
+
+.questions{
+  background-color:lightgrey;
+  width: 100%;
+  margin: 0%;
+ display: flex;
+ justify-content: space-between;
+
+  
+}
+.logout-link{
+  position: relative;
+ top:30px;
+ right:30px;
+}
+.sidebar{
+     background-color: rgba(24, 47, 98, 0.856);
+     width: 260px;
+     height: 440px; 
+     padding: 20px;
+     
+  
+}
+.sidebar-ques {
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.line {
+  margin: 20px 0;
+  width: 100%;
+  height: 1px;
+  background-color: #ccc;
+
+}
+a{
+  color:antiquewhite
+}
+.side-header{
+  display: flex;
+}
+.user-input{
+  margin-top: 8px;
+  margin-left: 300px;
+}
+.content{
+  box-sizing: border-box;
+  border: 5px solid;
+  width: 100%;
+  margin: 50px;
+  
+}
+.ques-input{
+  box-sizing: border-box;
+  border-radius: 30px;
+  border-style: none;
+  width: 400px;
+  height: 40px;
+}
+.back{
+  
+  width: 100%;
+
+}
+.ques-opt-head{
+  text-align: center;
+  padding: 50px;
+
+ 
+}
+.quiz-input{
+  text-align: center;
+}
+.ques-input{
+  width: 100%;
+}
+.ques-input-box{
+   box-sizing: border-box;
+   border: none;
+   border-radius: 15px ;
+  width: 700px;
+  height: 40px;
+  outline: none;
+  
+
+}
+.quiz-option{
+  
+  margin: 30px;
+  
+}
+.option{
+  margin-bottom: 20px;
+  
+  border: 1px solid #ccc;
+  width: 300px;
+  height: 30px;
+  outline: none;
+ border: none;
+  border-radius: 15px;
+ 
+}
+.option:hover,
+.option:focus {
+  border-color: #1de9b6; /* Highlight color on hover/focus */
+  outline: none;
+  box-shadow: 0 0 5px rgba(29, 233, 182, 0.5); /* Box shadow on hover/focus */
+}
+.intro-content{
+  display: grid;
+  
+  justify-content: center;
+  
+}
+.introc{
+  margin-top: 100px;
+  width:500px;
+  height: 100px; 
+  resize:none;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+.content-submit{
+  margin-top: 20px;  
+  display: grid;
+  justify-content: center;
+  height: 30px;
+  
 }
