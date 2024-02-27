@@ -37,11 +37,11 @@ const rollno=localStorage.getItem('registerno')
     
   }else{
     const uttersuccess=new SpeechSynthesisUtterance(passages[1]);
+    handleEnd(currentPage);
     window.speechSynthesis.speak(uttersuccess);
     setSelectedOption(selectedOption.toUpperCase()); // Convert to lowercase
     checkAnswer(selectedOption.toUpperCase());
-    index++;
-    handleEnd(index);
+    
     setTimeout(()=>{
       handleNextPage()
     },3000)
@@ -54,9 +54,7 @@ const rollno=localStorage.getItem('registerno')
     }
 
   }
-  useEffect(()=>{
-    handleEnd(index)
-  },[index])
+  
   const {
     transcript,
     listening,
@@ -167,12 +165,13 @@ const rollno=localStorage.getItem('registerno')
   const stopListening = () => {
     SpeechRecognition.stopListening();
   };
-  const handleEnd = (index) => {
-    if (index === questions.length-1) { 
+  const handleEnd = async (currentPage) => {
+    console.log(currentPage);
+    if (currentPage === questions.length-1) { 
       console.log("ended");
       setQuizzEnd(true);
       try {
-        const res = axios.post("http://localhost:9192/api/quizzes/addMarks", {
+        const res =await axios.post("http://localhost:9192/api/quizzes/addMarks", {
           rollno: rollno,
           marks: marks
         });
