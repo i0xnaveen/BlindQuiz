@@ -1,88 +1,121 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import getQuizById, { updateQuestion } from '../service/QuizService'
+import { getQuizById, updateQuestion } from '../service/QuizService';
+import './UpdateQuiz.css'; // Import your custom CSS file
 
 const UpdateQuiz = () => {
-    useEffect(()=>{
-        fetchQuestion();
-    },[])
-    const [question,setQuestion]=useState("");
-    const [choices,setChoices]=useState([""]);
-    const [correctAnswer,setCorrectAnswers]=useState("");
-       const {id}=useParams();
-       const fetchQuestion=async()=>{
-        try{
-        const updateQuestion=await getQuizById(id);
-        if(updateQuestion){
-            setQuestion(updateQuestion.question)
-            setChoices(updateQuestion.choices)
-            setCorrectAnswers(updateQuestion.correctAnswers)
-        }
-        }
-        catch(err){
-            console.log(err);
-        }
+  const { id } = useParams();
+  const [questions, setQuestion] = useState('');
+  const [choices, setChoices] = useState(['']);
+  const [correctAnswer, setCorrectAnswers] = useState('');
 
-       }
-       const handleQuestionChange=(e)=>{
-        setQuestion(e.target.value)
-       }
-       const handleChoiceChange=(index,e)=>{
-        const updatedChoices=[...choices];
-        updatedChoices[index]=e.target.value;
-        setChoices(updatedChoices);
-       }
-       const handlecorrectAnswer=(e)=>{
-        setCorrectAnswers(e.target.value);
-       }
-       const handleQuestionUpdate=async(e)=>{
-        e.preventDefault()
-        try{
-            const updatedQuestion={
-                question,
-                choices,
-                correctAnswer
-            }
-           await updateQuestion(id,updatedQuestion);
-        }
-        catch(error){
-          console.log(error);
-        }
-       }
+  useEffect(() => {
+    fetchQuestion();
+  }, []);
+
+  const fetchQuestion = async () => {
+    try {
+      const updatedQuestion = await getQuizById(id);
+      console.log("Updated Question:", updatedQuestion);
+      if (updatedQuestion) {
+        setQuestion(updatedQuestion.questions);
+        setChoices(updatedQuestion.choices);
+        setCorrectAnswers(updatedQuestion.correctAnswer);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleQuestionChange = (e) => {
+    setQuestion(e.target.value);
+  };
+
+  const handleChoiceChange = (index, e) => {
+    const updatedChoices = [...choices];
+    updatedChoices[index] = e.target.value;
+    setChoices(updatedChoices);
+  };
+
+  const handleCorrectAnswer = (e) => {
+    setCorrectAnswers(e.target.value);
+  };
+
+  const handleQuestionUpdate = async (e) => {
+    e.preventDefault();
+    try {
+      const updatedQuestion = {
+        questions,
+        choices,
+        correctAnswer,
+      };
+      await updateQuestion(id, updatedQuestion);
+      alert("Your question has been successfully updated!");
+      window.location.href = "http://localhost:3000/adminpage";
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-   <section className='container-fluid'>
-    <h4 className='mt-5' style={{color:"GrayText"}}>UpdateQuiz</h4>
-    <div className='col-md-8'>
-        <form onSubmit={handleQuestionUpdate}>
-            <label htmlFor="question">Question: </label><br/>
-            <textarea className='form-control'
-            rows={4}
-             value={question}
-             onChange={handleQuestionChange}/>
-             <br/><br/>
-             <div className='form-group'>
-                <label htmlFor='choice'>Choices: </label><br/>
-                {choices.map((choice,i)=>(
-                    <input key={i} type='text' 
-                     className='form-control mb-4'   
-                      value={choice} 
-                      onChange={(e)=>handleChoiceChange(i,e)}/>
-                ))}
-             </div>
-             <div className='form-group'>
-                <label htmlFor="answer">Answer:</label><br/>
-                <input type="text" value={correctAnswer}
-                className='form-control mb-4'
-                onChange={handlecorrectAnswer}/>
-             </div>
-             <div className='btn-group'>
-                <button type='submit' className='btn btn-sm btn-outline-warning'>Update Question</button>
-             </div>
-        </form>
+    <div className="container mt-5">
+      <div className="row justify-content-center">
+        <div className="col-md-8">
+          <div className="card shadow">
+            <div className="card-body">
+              <h5 className="card-title text-center mb-4">Update Quiz</h5>
+              <form onSubmit={handleQuestionUpdate}>
+                <div className="mb-3">
+                  <label htmlFor="question" className="form-label">
+                    Question:
+                  </label>
+                  <textarea
+                    className="form-control"
+                    rows={3}
+                    value={questions}
+                    onChange={handleQuestionChange}
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="choices" className="form-label">
+                    Choices:
+                  </label>
+                  {choices.map((choice, i) => (
+                    <input
+                      key={i}
+                      type="text"
+                      className="form-control mb-2"
+                      value={choice}
+                      onChange={(e) => handleChoiceChange(i, e)}
+                    />
+                  ))}
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="correctAnswer" className="form-label">
+                    Correct Answer:
+                  </label>
+                  <input
+                    type="text"
+                    value={correctAnswer}
+                    className="form-control"
+                    onChange={handleCorrectAnswer}
+                  />
+                </div>
+                <div className="d-grid gap-2">
+                  <button
+                    type="submit"
+                    className="btn btn-warning btn-sm"
+                  >
+                    Update Question
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  );
+};
 
-   </section>
-  )
-}
-
-export default UpdateQuiz
+export default UpdateQuiz;

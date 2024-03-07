@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '../css/login.css';
 import { checkUser } from '../service/QuizService';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+
 
 const Login = () => {
   const [registerno, setRegisterno] = useState('');
@@ -10,7 +10,7 @@ const Login = () => {
   const [username, setUsername] = useState('');
   const [passwd, setPasswd] = useState('');
   const [option, setOption] = useState('userLogin');
-  const navigate=useNavigate();
+  
   
 
   const registerHandle = (e) => {
@@ -69,7 +69,7 @@ const submitClick=async()=>{
   if(boo){
     localStorage.setItem("IsUserLogin","true");
     localStorage.setItem("registerno",registerno);
-    window.location.href="http://localhost:3000/fetchquiz";
+    window.location.href="http://localhost:3000/intro";
   }
  
 }

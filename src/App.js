@@ -6,14 +6,15 @@ import Login from './Pages/login';
 import Question from './Pages/question';
 import Intro from './Pages/intro';
 import Quiz from './Pages/quiz';
-import AllQuiz from './question/GetAllQuiz'
+
 import AddQuiz from './question/AddQuestion'
-import { ThemeProvider } from './Pages/ThemeContext';
 import GetAllQuiz from './question/GetAllQuiz';
 import FetchQuiz from './quiz/fetchQuiz';
-import Dictaphone from './quiz/DictaPhone';
+
 import AdminPage from './Pages/adminPage';
 import ThankYou from './quiz/thankYou';
+import UpdateQuiz from './question/UpdateQuiz';
+
 const router=createBrowserRouter([
   {
     path:'/',
@@ -42,10 +43,7 @@ const router=createBrowserRouter([
     path:'/fetchquiz',
     element:<FetchQuiz></FetchQuiz>
   },
-  {
-    path:'/check',
-    element:<Dictaphone></Dictaphone>
-  },
+  
   {
     path:'/adminpage',
     element:<AdminPage></AdminPage>
@@ -53,13 +51,16 @@ const router=createBrowserRouter([
   ,{
     path:'/thankyou',
     element:<ThankYou></ThankYou>
+  },{
+    path:'/updateQuiz/:id',
+    element:<UpdateQuiz></UpdateQuiz>
   }
 ])
 function App() {
   return (
-     <ThemeProvider>
+    
     <RouterProvider router={router}/>
-    </ThemeProvider>
+  
    
   );
 }

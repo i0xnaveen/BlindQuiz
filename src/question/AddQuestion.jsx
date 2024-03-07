@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react"
+import React, {  useState } from "react"
 
 import { Link,useNavigate } from "react-router-dom"
-import { createQuestion, getSubjects } from "../service/QuizService"
+import { createQuestion } from "../service/QuizService"
 
 const AddQuestion = () => {
 	const navigate=useNavigate();

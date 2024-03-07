@@ -9,12 +9,14 @@ const FetchQuiz = () => {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [redirect, setRedirect] = useState('');
   const[selectedOption,setSelectedOption]=useState('');
-  const [page,setPage]=useState(false);
   const [quizEnd,setQuizzEnd]=useState(false);
+  const [isStartTestCalled, setStartTestCalled] = useState(false);
+
   const navigate=useNavigate();
   const passages=["Please choose the option a or b or c or d","Moving to the nextQuestions"]
   let marks=0;
-  let index=1;
+  const pass="please tell start the test";
+ 
 const rollno=localStorage.getItem('registerno')
   const commands = [
     {
@@ -57,29 +59,41 @@ const rollno=localStorage.getItem('registerno')
   
   const {
     transcript,
-    listening,
+   
     browserSupportsSpeechRecognition,
     resetTranscript,
   } = useSpeechRecognition({ commands });
 
+  const startTest=()=>{
+    const uttext=new SpeechSynthesisUtterance(pass);
+    uttext.rate=0.7;
+    window.speechSynthesis.speak(uttext);
+    
+
+  }
   useEffect(() => {
     fetchAllQuestion();
     startListening();
+
     
     return () => {
       stopListening(); 
   };
   }, []);
-  const handlemarks=()=>{
-    marks=0;
-  }
+  useEffect(() => {
+    if (!isStartTestCalled) {
+      startTest();
+      setStartTestCalled(true);
+    }
+  }, [[isStartTestCalled]]);
+  
   useEffect(() => {
     if (redirect === 'start the test') {
       setTimeout(() => {
         playTheQuestion(currentPage);
       }, 3000);
     }
-    handlemarks();
+   
 
   }, [redirect]);
 
@@ -113,7 +127,7 @@ const rollno=localStorage.getItem('registerno')
     const synth = window.speechSynthesis;
     const text = "The 4 Options are";
     const questionUtterance = new SpeechSynthesisUtterance(text);
-    questionUtterance.rate = 2.4;
+    questionUtterance.rate = 0.7;
     synth.speak(questionUtterance);
   };
 
@@ -130,8 +144,8 @@ const rollno=localStorage.getItem('registerno')
       const synth = window.speechSynthesis;
       const utterance = new SpeechSynthesisUtterance(quizaudio);
       const utchoice = new SpeechSynthesisUtterance(quizoptions);
-      utterance.rate = 2.4;
-      utchoice.rate = 2.4;
+      utterance.rate = 0.7;
+      utchoice.rate = 0.7;
       utterance.onend = (event) => {
         speak();
         speakOptions(0);

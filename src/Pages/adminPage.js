@@ -21,40 +21,47 @@ const AdminPage = () => {
 
   return (
     <Container className="mt-4">
-      <Row>
+      <Row className="justify-content-center">
         <Col md={8}>
           <Card>
-            <Card.Header as="h5" className="text-center">
+            <Card.Header as="h5" className="text-center bg-dark text-white">
               Admin Page
             </Card.Header>
-            <Card.Body className="body" style={{ backgroundColor: '', color: 'white' }}>
-              <Row>
-                <Col md={6}>
+            <Card.Body className="bg-light">
+              <Row className="justify-content-center">
+                <Col md={6} className="mb-4">
                   <Card className="custom-card">
-                    <Card.Body>
+                    <Card.Body className=''>
                       <Card.Title>Add Questions</Card.Title>
                       <Card.Text>Add new questions to the quiz.</Card.Text>
                       <Link to="/addquiz">
-                        <Button variant="primary">Go to Add Questions</Button>
+                        <Button variant="dark" block>
+                          Go to Add Questions
+                        </Button>
                       </Link>
                     </Card.Body>
                   </Card>
                 </Col>
-              </Row>
-              <Row>
-                <Col md={6}>
-                  <Card className="custom-card">
-                    <Card.Body>
+                <Col md={6} className="mb-4">
+                  <Card className="custom-card ">
+                    <Card.Body className=''>
+                      
                       <Card.Title>Update Questions</Card.Title>
                       <Card.Text>Update existing questions in the quiz.</Card.Text>
                       <Link to="/GetallQuiz">
-                        <Button variant="success">Go to Update Questions</Button>
+                        <Button variant="dark" block>
+                          Go to Update Questions
+                        </Button>
                       </Link>
-                      <Button variant="warning" onClick={handleLogout}>
-                        Logout
-                      </Button>
                     </Card.Body>
                   </Card>
+                </Col>
+                <Col md={2}>
+                 
+                      <Button variant="danger" block onClick={handleLogout}>
+                        Logout
+                      </Button>
+                  
                 </Col>
               </Row>
             </Card.Body>

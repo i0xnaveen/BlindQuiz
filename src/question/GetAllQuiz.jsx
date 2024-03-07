@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { deleteQuestionById, getAllQuestion } from '../service/QuizService';
 import { useNavigate } from 'react-router-dom';
+
 const GetAllQuiz = () => {
     const navigate=useNavigate();
   const isAdminAuthenticated = localStorage.getItem('isAdminAuthenticated') === 'true';
@@ -10,7 +11,7 @@ const GetAllQuiz = () => {
     const [questions, setQuestions] = useState([
         { id: "", correctAnswer: "", choices: [] }
     ]);
-    const [isLoading, setIsLoading] = useState(true);
+   
     const [isQuestionDeleted, setIsQuestionDeleted] = useState(false);
     const [deleteSuccessMessage, setDeleteSuccessMessage] = useState("");
 
@@ -26,7 +27,7 @@ const GetAllQuiz = () => {
         try {
             const data = await getAllQuestion();
             setQuestions(data);
-            setIsLoading(false);
+           
         } catch (err) {
             console.log(err);
         }
@@ -45,10 +46,10 @@ const GetAllQuiz = () => {
             setDeleteSuccessMessage("");
         }, 4000);
     };
-    const handleUpdate=(id)=>{
-        window.location.href=`/update-question?qId=${id}`;
-
-    }
+    const handleUpdate = (id) => {
+        navigate(`/updateQuiz/${id}`);
+      };
+      
 
     return (
         <section className='container-fluid p-3 mb-2 bg-secondary text-white'>
@@ -71,7 +72,7 @@ const GetAllQuiz = () => {
                     <p className='text-muted'>Correct Answer: {question.correctAnswer}</p>
                     <div className='btn-group mb-4'>
                         <button
-                            className='btn btn-outline-danger btn-sm'
+                            className='btn btn-danger btn-sm'
                             onClick={() => handleDelete(question.id)}>
                             Delete
                         </button>
