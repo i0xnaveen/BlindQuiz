@@ -20,6 +20,7 @@ pipeline {
             steps {
                 script {
                     // Start MySQL container
+                    sh 'sudo su'
                     sh 'docker run -d --name mysql-container -e MYSQL_ROOT_PASSWORD=mysql -e MYSQL_DATABASE=quizonline -e MYSQL_USER=root3 -e MYSQL_PASSWORD=mysql -p 3306:3306 mysql:latest'
                     
                     // Allow time for MySQL to start
