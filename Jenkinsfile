@@ -40,7 +40,7 @@ pipeline {
             steps {
                 script {
                     // Start your application
-                    sh 'npm start'
+                    sh 'npm test'
                     
                     // Run tests
                     dir('quizBckend-Online') {
