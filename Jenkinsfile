@@ -24,7 +24,11 @@ pipeline {
                     
                     // Allow time for MySQL to start
                     sleep 30
-                    sh 'npm install --force'
+                 
+                        sh 'npm install --force'
+                        sh 'docker build -t i0xnaveen/quiz-frontend:latest .'
+                        sh 'docker push i0xnaveen/quiz-frontend:latest'
+                    
                     dir('quizBckend-Online') {
                         sh 'mvn clean package'
                     }
@@ -44,16 +48,13 @@ pipeline {
                 }
             }
         }
-        stage('Docker image build'){
-            steps{
-                script{
-                    withDockerRegistry(credentialsId: 'dockerhub',toolname: 'docker')
-                    sh 'docker build -t quiz-frontend .'
-                    sh 'docker tag quiz-frontend i0xnaveen/quiz-frontend:latest'
-                    sh 'docker push i0xnaveen/quiz-frontend:latest'
-                    dir('quizBckend-Online')
-                    sh 'docker-compose build'
-                    sh 'docker-compose push'
+        stage('Docker image build') {
+            steps {
+                script {
+                    withDockerRegistry(credentialsId: 'dockerhub', toolName: 'docker') {
+                        sh 'docker-compose build'
+                        sh 'docker-compose push'
+                    }
                 }
             }
         }
@@ -64,7 +65,6 @@ pipeline {
             script {
                 sh 'docker stop mysql-container'
                 sh 'docker rm mysql-container'
-               
             }
         }
     }
