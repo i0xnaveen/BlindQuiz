@@ -52,10 +52,8 @@ pipeline {
                     sh 'docker tag quiz-frontend i0xnaveen/quiz-frontend:latest'
                     sh 'docker push i0xnaveen/quiz-frontend:latest'
                     dir('quizBckend-Online')
-                    sh 'docker build -t quiz-backend .'
-                    sh 'docker tag quiz-backend i0xnaveen/quiz-backend:latest'
-                    sh 'docker push i0xnaveen/quiz-backend:latest'
-                    
+                    sh 'docker-compose build'
+                    sh 'docker-compose push'
                 }
             }
         }
