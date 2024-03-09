@@ -24,11 +24,6 @@ pipeline {
                     
                     // Allow time for MySQL to start
                     sleep 30
-
-                    // Your database setup scripts or commands go here
-                    // For example: sh 'mysql -h localhost -u root3 -pmysql quizonline < setup.sql'
-
-                    // Build application
                     sh 'npm install --force'
                     dir('quizBckend-Online') {
                         sh 'mvn clean package'
@@ -46,6 +41,21 @@ pipeline {
                     dir('quizBckend-Online') {
                         sh 'mvn test'
                     }
+                }
+            }
+        }
+        stage('Docker image build'){
+            steps{
+                script{
+                    withDockerRegistry(credentialsId: 'dockerhub',toolname: 'docker')
+                    sh 'docker build -t quiz-frontend .'
+                    sh 'docker tag quiz-frontend i0xnaveen/quiz-frontend:latest'
+                    sh 'docker push i0xnaveen/quiz-frontend:latest'
+                    dir('quizBckend-Online')
+                    sh 'docker build -t quiz-backend .'
+                    sh 'docker tag quiz-backend i0xnaveen/quiz-backend:latest'
+                    sh 'docker push i0xnaveen/quiz-backend:latest'
+                    
                 }
             }
         }
