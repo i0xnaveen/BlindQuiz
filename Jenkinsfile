@@ -26,8 +26,7 @@ pipeline {
                     sleep 30
                  
                         sh 'npm install --force'
-                        sh 'docker build -t i0xnaveen/quiz-frontend:latest .'
-                        sh 'docker push i0xnaveen/quiz-frontend:latest'
+                        
                     
                     dir('quizBckend-Online') {
                         sh 'mvn clean package'
@@ -52,8 +51,12 @@ pipeline {
             steps {
                 script {
                     withDockerRegistry(credentialsId: 'dockerhub', toolName: 'docker') {
+                        sh 'docker build -t i0xnaveen/quiz-frontend:latest .'
+                        sh 'docker push i0xnaveen/quiz-frontend:latest'
+                        dir('quizBckend-Online'){
                         sh 'docker-compose build'
                         sh 'docker-compose push'
+                        }   
                     }
                 }
             }
