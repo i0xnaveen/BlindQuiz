@@ -64,6 +64,7 @@ pipeline {
             script {
                 sh 'docker stop mysql-container'
                 sh 'docker rm mysql-container'
+               
             }
         }
     }
