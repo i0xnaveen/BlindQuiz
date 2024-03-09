@@ -19,6 +19,7 @@ services:
       - mysql-container
     ports:
       - "8080:8080"
+    image: i0xnaveen/quiz-backend:latest 
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql-container:3306/quizonline
       SPRING_DATASOURCE_USERNAME: root3
