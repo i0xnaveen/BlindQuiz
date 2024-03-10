@@ -11,6 +11,8 @@ services:
       MYSQL_PASSWORD: mysql
     ports:
       - "3306:3306"
+    networks:
+      - leo
 
   quiz-backend:
     build:
@@ -20,8 +22,13 @@ services:
       - mysql-container
     ports:
       - "9080:9090"
-    image: i0xnaveen/quiz-backend:latest 
+    image: i0xnaveen/quiz-backend:latest
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql-container:3306/quizonline
       SPRING_DATASOURCE_USERNAME: root3
       SPRING_DATASOURCE_PASSWORD: mysql
+    networks: 
+      - leo
+
+networks: 
+  leo:
