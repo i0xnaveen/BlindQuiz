@@ -25,7 +25,7 @@ pipeline {
                     // Allow time for MySQL to start
                     sleep 30
                  
-                        sh 'npm install --force'
+                       
                         
                     
                     dir('quizBckend-Online') {
@@ -51,8 +51,8 @@ pipeline {
             steps {
                 script {
                     withDockerRegistry(credentialsId: 'dockerhub', toolName: 'docker') {
-                        sh 'docker build -t i0xnaveen/quiz-frontend:latest .'
-                        sh 'docker push i0xnaveen/quiz-frontend:latest'
+                        sh 'pwd'
+                        sh 'ls -la'
                         sh 'docker compose version'
                         sh 'docker-compose build'
                         sh 'docker-compose push'
