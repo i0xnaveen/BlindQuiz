@@ -53,7 +53,6 @@ pipeline {
                     withDockerRegistry(credentialsId: 'dockerhub', toolName: 'docker') {
                         sh 'docker build -t i0xnaveen/quiz-frontend:latest .'
                         sh 'docker push i0xnaveen/quiz-frontend:latest'
-                       
                         sh 'docker-compose build'
                         sh 'docker-compose push'
                         
