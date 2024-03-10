@@ -54,8 +54,8 @@ pipeline {
                         sh 'pwd'
                         sh 'ls -la'
                         sh 'docker compose version'
-                        sh 'docker-compose build'
-                        sh 'docker-compose push'
+                        sh 'docker compose build'
+                        sh 'docker compose push'
                         
                     }
                 }
