@@ -20,7 +20,7 @@ pipeline {
             steps {
                 script {
                     // Start MySQL container
-                     sh 'docker-compose up -d mysql-container'
+                     sh 'docker compose up -d mysql-container'
                     // Allow time for MySQL to start
                     sleep 30
                  
