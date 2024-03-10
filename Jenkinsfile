@@ -20,8 +20,7 @@ pipeline {
             steps {
                 script {
                     // Start MySQL container
-                    sh 'docker run -d --name mysql-container -e MYSQL_ROOT_PASSWORD=mysql -e MYSQL_DATABASE=quizonline -e MYSQL_USER=root3 -e MYSQL_PASSWORD=mysql -p 3306:3306 mysql:latest'
-                    
+                     sh 'docker-compose up -d mysql-container'
                     // Allow time for MySQL to start
                     sleep 30
                  
