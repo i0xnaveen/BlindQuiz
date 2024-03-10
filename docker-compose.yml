@@ -12,7 +12,7 @@ services:
     ports:
       - "3306:3306"
     networks:
-      - blindquiz_leo
+      - leo
 
   quiz-backend:
     build:
@@ -28,6 +28,6 @@ services:
       SPRING_DATASOURCE_USERNAME: root3
       SPRING_DATASOURCE_PASSWORD: mysql
     networks: 
-      - blindquiz_leo
+      - leo
 
 
